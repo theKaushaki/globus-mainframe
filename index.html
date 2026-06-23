@@ -259,11 +259,40 @@ footer {
             transform: translateY(-2px); 
         }
 
+        .navbar-brand {
+            font-family: 'Lora', serif !important;
+            font-size: 1.8rem !important;
+            font-weight: 600;
+            color: #d8c7a2 !important;
+            text-shadow: 0 0 12px rgba(176,141,87,.15);
+            margin-right: 20px;
+            text-decoration: none;
+            font-family: 'Lora', serif !important;
+            color: #d7d0c7 !important;       /* Matches the other links */
+            font-size: 1.1rem !important;    /* Shrunk down from 1.8rem */
+            font-weight: 400;                /* Removed the bold 600 weight */
+            text-transform: uppercase;       /* Makes it all caps */
+            letter-spacing: .15em;           /* Adds the wide spacing */
+            text-shadow: none;               /* Removes the glowing effect */
+            margin-right: 20px;
+            text-decoration: none;
+        }
+
+        .custom-nav-link {
+            font-family: 'Lora', serif;
+            color: #d7d0c7 !important;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            transition: 0.3s ease;
+            padding: 8px 15px !important;
+        }
+
 </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md custom-navbar fixed-top" id="main-nav">
+<nav class="navbar-brand custom-nav-link" id="main-nav">
   <div class="container">
     <a href="index.html" class="navbar-brand">
       The Shadow Protocol
@@ -288,6 +317,7 @@ footer {
     </div>
   </div>
 </nav>
+
 
 <main role="main">
   
