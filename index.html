@@ -292,32 +292,31 @@ footer {
 </head>
 <body>
 
-<nav class="navbar-brand custom-nav-link" id="main-nav">
-  <div class="container">
-    <a href="index.html" class="navbar-brand">
+<nav class="custom-navbar fixed-top" id="main-nav" style="width: 100%; display: flex; align-items: center; padding: 15px 0;">
+  <div class="container" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: nowrap; width: 100%; max-width: 1200px; margin: 0 auto;">
+    
+    <!-- Left Side: The Title -->
+    <a href="index.html" class="navbar-brand" style="margin: 0; padding: 0; white-space: nowrap; flex-shrink: 0;">
       The Shadow Protocol
     </a>
 
-    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#base-navbars" aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="base-navbars">
-      <ul class="navbar-nav mx-auto w-100 justify-content-evenly mt-3 mt-md-0">
-         <li class="nav-item">
-          <a class="nav-link custom-nav-link" href="challenges.html">Their Story</a>
+    <!-- Right Side: The Links -->
+    <div id="base-navbars" style="display: flex; justify-content: flex-end; flex-grow: 1;">
+      <ul style="display: flex; flex-direction: row; align-items: center; margin: 0; padding: 0; list-style: none; gap: 40px; flex-wrap: nowrap;">
+         <li>
+          <a class="custom-nav-link" href="challenges.html" style="margin: 0; padding: 0; white-space: nowrap;">Their Story</a>
         </li>
-         <li class="nav-item">
-          <a class="nav-link custom-nav-link" href="scoreboard.html">Scoreboard</a>
+         <li>
+          <a class="custom-nav-link" href="scoreboard.html" style="margin: 0; padding: 0; white-space: nowrap;">Scoreboard</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link custom-nav-link" href="analytics.html">Analytics</a>
+        <li>
+          <a class="custom-nav-link" href="analytics.html" style="margin: 0; padding: 0; white-space: nowrap;">Analytics</a>
         </li>
       </ul>
     </div>
+    
   </div>
 </nav>
-
 
 <main role="main">
   
