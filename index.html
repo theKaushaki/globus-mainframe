@@ -227,6 +227,38 @@ footer {
 ::-webkit-scrollbar-thumb { background: rgba(176,141,87,.35); border-radius: 20px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(176,141,87,.55); }
 
+/* Force The Shadow Protocol title to perfectly match the links */
+        .navbar-brand { 
+            font-family: 'Lora', serif !important; 
+            color: #d7d0c7 !important; 
+            font-size: 1.1rem !important; 
+            font-weight: 400 !important; 
+            text-transform: uppercase !important; 
+            letter-spacing: .15em !important; 
+            text-shadow: none !important; 
+            margin-right: 20px !important; 
+            text-decoration: none !important;
+            padding: 8px 15px !important;
+        }
+
+        /* The Links */
+        .custom-nav-link { 
+            font-family: 'Lora', serif !important; 
+            color: #d7d0c7 !important; 
+            font-size: 1.1rem !important; 
+            font-weight: 400 !important; 
+            text-transform: uppercase !important; 
+            letter-spacing: .15em !important; 
+            padding: 8px 15px !important; 
+            text-decoration: none !important;
+            transition: 0.3s ease !important; 
+        }
+
+        .custom-nav-link:hover, .navbar-brand:hover { 
+            color: #b08d57 !important; 
+            transform: translateY(-2px); 
+        }
+
 </style>
 </head>
 <body>
