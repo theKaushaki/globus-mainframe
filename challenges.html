@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenges | The Shadow Protocol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Parisienne&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background: #090909 !important;
+            color: #d7d0c7 !important;
+            font-family: 'IM Fell English SC', serif; /* Changed to Bookerly-style readable font */
+            padding-bottom: 100px;
+        }
+
+        /* Fixed Theme Navbar */
+        .custom-navbar {
+            background: rgba(9, 9, 9, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(176,141,87,.15) !important;
+            padding: 15px 0;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .navbar-brand {
+            font-family: 'Lora', serif !important;
+            font-size: 1.8rem !important;
+            font-weight: 600;
+            color: #d8c7a2 !important;
+            text-shadow: 0 0 12px rgba(176,141,87,.15);
+            margin-right: 20px;
+            text-decoration: none;
+            font-family: 'Lora', serif !important;
+            color: #d7d0c7 !important;       /* Matches the other links */
+            font-size: 1.1rem !important;    /* Shrunk down from 1.8rem */
+            font-weight: 400;                /* Removed the bold 600 weight */
+            text-transform: uppercase;       /* Makes it all caps */
+            letter-spacing: .15em;           /* Adds the wide spacing */
+            text-shadow: none;               /* Removes the glowing effect */
+            margin-right: 20px;
+            text-decoration: none;
+        }
+
+        .custom-nav-link {
+            font-family: 'Lora', serif;
+            color: #d7d0c7 !important;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            transition: 0.3s ease;
+            padding: 8px 15px !important;
+        }
+
+        .custom-nav-link:hover {
+            color: #b08d57 !important;
+            transform: translateY(-2px);
+        }
+
+        /* Styling the Mobile Hamburger Menu */
+        .navbar-toggler {
+            border-color: rgba(176,141,87,.4) !important;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28176, 141, 87, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        hr { opacity: 1 !important; }
+
+        /* Grid Challenge Card Styles */
+        .challenge-card {
+            background: rgba(176,141,87,.03);
+            border: 1px solid rgba(176,141,87,.18);
+            padding: 40px 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(176,141,87,.04);
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .challenge-card:hover {
+            border: 1px solid rgba(176,141,87,.6);
+            background: rgba(176,141,87,.08);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(176,141,87,.1);
+        }
+
+        .challenge-title {
+            font-family: 'IM Fell English SC', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #d8c7a2;
+            text-shadow: 0 0 12px rgba(176,141,87,.15);
+            margin-bottom: 0;
+        }
+
+        /* Custom Modal (Pop-up) Styles */
+        .custom-modal {
+            background: #0d0d0d;
+            border: 1px solid rgba(176,141,87,.4);
+            box-shadow: 0 0 60px rgba(0,0,0,0.8);
+        }
+        
+        .custom-modal-header {
+            border-bottom: 1px solid rgba(176,141,87,.15);
+            padding: 25px 30px;
+        }
+
+        .custom-modal-title {
+            font-family: 'Cinzel Decorative', serif; /* Removed cursive */
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: #d8c7a2;
+            margin: 0;
+        }
+
+        .custom-modal-body {
+            padding: 30px;
+            font-size: 1.15rem;
+            color: #b3aba0;
+            line-height: 1.8;
+            font-family: 'Lora', serif; /* Highly readable body text */
+        }
+
+        .custom-modal-footer {
+            border-top: 1px solid rgba(176,141,87,.15);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flag-format {
+            font-family: monospace;
+            color: #b08d57;
+            background: rgba(176,141,87,.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .challenge-points {
+            font-family: sans-serif;
+            font-weight: 600;
+            color: #ddd6ca;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        /* Custom Scrollbar for Modal */
+        .custom-modal-body::-webkit-scrollbar { width: 5px; }
+        .custom-modal-body::-webkit-scrollbar-track { background: transparent; }
+        .custom-modal-body::-webkit-scrollbar-thumb { background: rgba(176,141,87,.4); border-radius: 4px; }
+    </style>
+</head>
+<body>
+  
+<nav class="navbar navbar-expand-md custom-navbar fixed-top" id="main-nav">
+  <div class="container">
+    <a href="index.html" class="navbar-brand">
+      The Shadow Protocol
+    </a>
+
+    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#base-navbars" aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <ul class="navbar-nav mx-auto w-100 justify-content-evenly mt-3 mt-md-0">
+         <li class="nav-item">
+          <a class="nav-link custom-nav-link" href="challenges.html">Their Story</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link custom-nav-link" href="scoreboard.html">Scoreboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link custom-nav-link" href="analytics.html">Analytics</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="container" style="margin-top: 120px;">
+        
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 style="font-family: 'Parisienne', cursive; color: #b08d57; font-size: 2.5rem; letter-spacing: 2px;">Act 1: The Ghost in The Machine</h2>
+                <hr style="border-top: 1px solid rgba(176,141,87,.3); width: 30%; margin: 15px auto;">
+            </div>
+        </div>
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="challenge-card" data-bs-toggle="modal" data-bs-target="#modal-1">
+                    <div class="challenge-title">There Was</div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="challenge-card" data-bs-toggle="modal" data-bs-target="#modal-2">
+                    <div class="challenge-title">No Salvation</div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="challenge-card" data-bs-toggle="modal" data-bs-target="#modal-3">
+                    <div class="challenge-title">Neither In Gold</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 mb-4">
+            <div class="col-12 text-center">
+                <h2 style="font-family: 'Parisienne', cursive; color: #b08d57; font-size: 2.5rem; letter-spacing: 2px;">Act 2: The Man Behind The God</h2>
+                <hr style="border-top: 1px solid rgba(176,141,87,.3); width: 30%; margin: 15px auto;">
+            </div>
+        </div>
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="challenge-card" data-bs-toggle="modal" data-bs-target="#modal-4">
+                    <div class="challenge-title">Nor In Power</div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="challenge-card" data-bs-toggle="modal" data-bs-target="#modal-5">
+                    <div class="challenge-title">Except The Thought</div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="challenge-card" data-bs-toggle="modal" data-bs-target="#modal-6">
+                    <div class="challenge-title">Of You</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 mb-4">
+            <div class="col-12 text-center">
+                <h2 style="font-family: 'Parisienne', cursive; color: #b08d57; font-size: 2.5rem; letter-spacing: 2px;">Act 3: The Dead Tell No Tales</h2>
+                <hr style="border-top: 1px solid rgba(176,141,87,.3); width: 30%; margin: 15px auto;">
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="challenge-card" data-bs-toggle="modal" data-bs-target="#modal-7">
+                    <div class="challenge-title">During The Time Of</div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="challenge-card" data-bs-toggle="modal" data-bs-target="#modal-8">
+                    <div class="challenge-title">The Rise of Globus</div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="challenge-card" data-bs-toggle="modal" data-bs-target="#modal-9">
+                    <div class="challenge-title">And The Fall Of Me</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="margin-top:100px; color:#5c554d; font-size:.8rem; text-align:center; letter-spacing:.18em; text-transform:uppercase; font-family:sans-serif;">
+        Globus Electronics Ltd.<br><br>
+        All Rights Reserved. 
+    </div>
+
+<div class="modal fade" id="modal-1" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content custom-modal">
+            <div class="modal-header custom-modal-header">
+                <h5 class="custom-modal-title">There Was</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body custom-modal-body">
+                <p>Nobody could quite agree on when Globus became important. That was part of the problem. There was no decisive moment. No famous speech. No election. No coup. No flag planted atop a conquered hill.</p>
+                <p>One year people joked about it. A few years later they complained about it. A few years after that they depended on it. And then, somehow, it became impolite to imagine the world without it.</p>
+                <p>The old men remembered blackouts. The young did not. The old remembered shortages. The young did not. The old remembered sitting in traffic, waiting in lines, watching governments spend years solving problems that should have taken weeks. The young looked at them the way people look at stories about horse-drawn carriages. The world simply worked now.</p>
+                <p>Water arrived. Food arrived. Medicine arrived. Power arrived. The lights stayed on. The shelves stayed full. The trains arrived when they were supposed to. The storms came and somehow mattered less than they used to. People stopped discussing infrastructure in the same way they stopped discussing gravity.</p>
+                <p>And behind Globus, somewhere beyond the layers of infrastructure and algorithms and bureaucracy, existed a man nobody had ever truly seen.</p>
+                <p>Tejas Khanna. People had heard him, certainly. The voice appeared often enough. Quarterly addresses. Emergency broadcasts. Policy briefings. The occasional message released after some crisis had been quietly averted. Always the same voice. Measured. Precise. Almost unnervingly calm. The sort of voice people trusted before they realized they were trusting it.</p>
+                <p>But the man himself remained elusive. No interviews. No public appearances. No speeches from balconies. No campaign rallies. Only recordings. Only statements. Only carefully released messages from somewhere behind the machinery.</p>
+                <p>As if Tejas Khanna were less a person than a position. Less a man than an institution. People filled the gaps with stories. They always do. Some believed he was the greatest engineer who had ever lived. Others believed he was little more than a mascot attached to a machine nobody understood. Conspiracy forums insisted he was dead. Political commentators insisted he was dangerous. Economists called him inevitable. The public called him whenever the world began falling apart.</p>
+                <p>Not literally, of course. But close enough. When a city flooded. When power grids failed. When supply chains collapsed. When another government discovered that reality was more complicated than campaign promises. The same question always followed. What would Globus do? And sooner or later a recording would appear. A calm voice. A solution. And life would continue.</p>
+                <p>The strange thing was that most people liked him. Or perhaps they liked what he represented. Reliability. Competence. The increasingly radical notion that somebody, somewhere, seemed to know what they were doing. The world had become too large for heroes. Too interconnected for kings. Too cynical for prophets.</p>
+                <p>Yet somehow Tejas Khanna occupied a little of all three. Nobody knew him. Everyone knew his name. And over time that distinction stopped mattering. A joke began circulating online. Nobody remembered who started it. Like all enduring jokes, it survived because it felt almost true. If the twenty-first century ever produced a king, nobody would crown him. They would simply call him indispensable.</p>
+                <p>And that, many suspected, was exactly what had happened. GLOBUS. The thing was there. The thing worked. What more was there to say? That was how Globus entered history. Not as a conqueror. As an appliance.</p>
+                <p>The sort of thing so reliable that eventually nobody remembers life before it. The sort of thing nobody notices until it breaks. And lately, things had begun to break.</p>
+                <p>Not dramatically. Not all at once. Reality was simply becoming difficult to reconcile. A neighbour develops a cough that never leaves. A hospital waiting room grows more crowded each week. The sunsets acquire an unpleasant colour. Birds disappear. Children develop strange respiratory illnesses. The air smells faintly metallic after rain.</p>
+                <p>Everyone notices. Nobody says anything. Because the reports insist otherwise. The graphs insist otherwise. The numbers insist otherwise. And numbers have become very persuasive in recent years. The sirens, however, do not care about numbers. The sirens have not stopped for three nights.</p>
+                <p>Globus knows something is wrong. And somebody inside Globus just risked everything to contact you.</p>
+                <p>At 02:13 AM, an unregistered cargo drone silently deposits a hardened equipment case onto your apartment balcony. No sender. No destination markings. No digital signature. Only a single word in that flowy cursive which you can recognise anywhere, what with the lopsided y's, across the lid.</p>
+                <p>HRUDAYA.</p>
+                <p>The name hits harder than it should. Twenty years is supposed to be enough time. Apparently it isn't. You haven't heard that name spoken aloud in years. Not since his disappearance. Not since he vanished from the world as completely as though he had never existed.</p>
+                <p>You stare at the case for a long time before opening it. Inside there was a stripped offline terminal, a bit damaged logic analyzer, a thermal imaging printout, a handgun, and a handwritten note.</p>
+                <p>The gun immediately feels wrong. Not because of what it is. Because of who sent it. You remember Hrudaya hating weapons. He used to joke that engineers built things because they lacked the courage to destroy them. The memory leaves a sour taste in your mouth.</p>
+                <p>The note is written in handwriting you recognize instantly. Twenty years vanish in a heartbeat. Just one line. "Hi! It's me again. Mashere, software can be wiped, but hardware remembers."</p>
+                <p>You almost laugh. Not because it's funny. Because it sounds exactly like him. The same infuriating habit of turning everything into a metaphor. Everything into a joke. The same tendency to speak in riddles even when nobody asked.</p>
+                <p>The terminal sits silently on the table. Dead. Or pretending to be. The thermal scan included in the case reveals something strange. Even while powered off, one region of the motherboard is violently producing heat.</p>
+                <p>The thermal signature isn't a standard electrical short; the energy is pulsing across the board's traces in a multi-phasic matrix.</p>
+                <p>A memory surfaces uninvited. Sunny, the AC did little to help the humidity in the air. A laboratory. A whiteboard covered in equations. Hrudaya explaining some absurd electrical design he called a <strong>Morphing Grid.</strong> Named after some japanese superhero series. A system that could remain alive long after the primary source failed.</p>
+                <p>You remember teasing him, "So it's basically a backup plan?"<br>He had shaken his head. Smiling, he had said, "No." Then he pointed at the diagram.<br>"A backup assumes failure, this assumes survival, always."</p>
+                <p>The memory fades. You still remember him calling it a Morphing Grid bypass in the margins of his notes, a way to tap into a backup current when the primary grid was dead.</p>
+                <p>If only you can find where the heat source was coming from.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-2" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content custom-modal">
+            <div class="modal-header custom-modal-header">
+                <h5 class="custom-modal-title">No Salvation</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body custom-modal-body">
+                <p>The Morphing Grid standby circuit powers the terminal for only a few precious seconds before the watchdog timer forces a hard reset.</p>
+                <p>Then darkness. Again. And again. And again. Whatever Hrudaya has hidden inside this machine, he clearly never intended it to remain awake for long. But now you know where to look.</p>
+                <p>Beneath layers of scorched kapton tape near coordinate X19Y93, you uncover something that feels distinctly familiar. Not because you understand it immediately. Because it is messy. Hrudaya's work was always messy. Not careless. Never careless. But alive.</p>
+                <p>Most engineers built systems that looked elegant on paper. Hrudaya built systems that survived reality. What emerges beneath the damaged insulation is not a clean interface. Not a connector. Not a debug port. It is a grotesque improvisation.</p>
+                <p>A hand-soldered resistor ladder feeding directly into a Schmitt-trigger comparator network. The sort of solution that would make professors angry and engineers quietly impressed.</p>
+                <p>For a moment you can almost see him. Curled over a workbench at three in the morning. Coffee gone cold. Ignoring every convention because the convention was wrong. You hate how easy it is to remember.</p>
+                <p>Twenty years should have been enough. Apparently it wasn't. A note has been scratched directly onto the metal shielding. The handwriting is unmistakable.</p>
+                <p><strong>"I can't be your ghost right now. I need to exist."</strong></p>
+                <p>The words strike something buried deep inside you. Not because you understand them. Because you almost do.</p>
+                <p>A memory flickers. A dark lecture hall. A film screening. Still early in your life where you had just met him. Interstellar. The two of you sitting near the back because Hrudaya insisted that films deserved darkness.</p>
+                <p>You remember laughing at how seriously he took them. You remember him arguing for nearly an hour afterward about the ending. About ghosts. About memory. About love. About how people leave traces of themselves inside systems they never intended.</p>
+                <p>You remember rolling your eyes. You remember secretly loving the way his mind worked. You do not remember how the conversation ended.</p>
+                <p>The memory vanishes before you can reach it. Only the ache remains. Beside the comparator network another note waits. Smaller. Almost an afterthought. As though written during one of those sleepless nights when Hrudaya's thoughts moved faster than his hands.</p>
+                <p><strong>"Some constants are worth remembering."</strong></p>
+                <p>Nothing more. No explanation. No instructions. Typical. The surviving diagnostic cache contains fragments of system parameters and scattered engineering notes. At first glance they appear unrelated. Film references. Numerical constants. Electrical equations. Nonsense. Then you remember who wrote them. For Hrudaya, the difference between science and poetry had always been largely administrative.</p>
+                <p>The environment inside the bypass network is unstable. The comparator thresholds drift unpredictably. The node voltages no longer align. Somewhere inside the surviving fragments lies the information necessary to reconstruct the circuit's final state. The terminal resets again. The screen flashes white. Then black. Waiting. Patiently. As though it knows you will eventually understand. As though somebody spent twenty years believing that you would.</p>
+                <p>You look back at the surviving diagnostic cache. The references suddenly feel less random. The values are not hidden. They are remembered.</p>
+                <p>Somewhere within the surviving notes lie three constants Hrudaya expected you to recognize, the time dilation factor of the water planet, the total number of Lazarus missions launched, and the rotational speed required to dock with the Endurance.</p>
+                <p>Three numbers. Three memories. Three keys. The sort of absurd puzzle only Hrudaya would build. The sort of absurd puzzle only you were ever expected to solve.</p>
+                <p>Determine the values required to calculate the final voltages at V₃, V₂, V₁, and V₀. The four comparator gates monitor these nodes. If a node's voltage exceeds the SCHMITT_HIGH threshold, its output state becomes HIGH (1). If it falls below the threshold, it remains LOW (0).</p>
+                <p>Map the resulting comparator outputs (B₃B₂B₁B₀) to generate the 4-bit binary unlock sequence and convert it into the final hardware PIN.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-3" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content custom-modal">
+            <div class="modal-header custom-modal-header">
+                <h5 class="custom-modal-title">Neither In Gold</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body custom-modal-body">
+                <p>PIN ACCEPTED.</p>
+                <p>You had forgotten the days with him actually, the days where your mind used to work harder than your body did, it seemed you had forgotten how much you loved it, but it was all there. His love for films like Interstellar, The Matrix, and Ball. Your love for his love for films, all the memories were rushing back and you had nowhere to put it. Grief is a circular staircase.</p>
+                <p>You were reminiscing when a small, quick chime brought you back to the present.</p>
+                <p>The terminal had powered on for exactly 11 seconds before Globus's hardware purge daemon activated. The SSD was empty. The operating system was gone. Even the boot partition had been zeroed.</p>
+                <p>But you know Hrudaya never trusted software storage. Beneath the motherboard shielding, you locate a Winbond EEPROM flash chip wired directly into the embedded controller bus.</p>
+                <p>You tap into the chip using the logic analyzer in the hard case and the screen flashes for a moment, displays a plaintext, and then dumps the surviving memory contents before the watchdog resets the board again.</p>
+                <p><code>the_white_rabbit_runs_where</code></p>
+                <p>You know Hrudaya too well for this to be the real secret. The plaintext string is bait. A breadcrumb. A wink. The sort of thing he would leave behind not because he expected it to stop anyone, but because he enjoyed the idea of somebody finding it.</p>
+                <p>No. There is another layer. There is always another layer. You lean back in your chair.</p>
+                <p>The corrupted memory dump spills across the screen in fractured columns of hexadecimal noise. For a moment it reminds you of rain. Then of something else. Green text. Black screens.</p>
+                <p>Your dainty little apartment with cheap thrifted furniture, nearly twenty years ago. The Matrix. Yes, you both had just watched it that night. You remember Hrudaya insisting that everybody misunderstood it.</p>
+                <p>Naturally. He always believed everybody misunderstood everything. The argument had lasted half the night. You had claimed the film was about freedom. He had called that a dangerously incomplete reading. You had accused him of being insufferable. He had thanked you.</p>
+                <p>You remember him leaning towards you, to keep his head on your shoulder, eyes bright with the manic enthusiasm that usually preceded either a breakthrough or a disaster.</p>
+                <p>"Nobody chooses freedom."<br>You had laughed, "That's literally the point of the film."<br>"No." He had shook his head. "The point is that everybody says they want freedom until freedom becomes inconvenient."<br>You rolled your eyes.<br>"And what do they want instead?"<br>"Control."</p>
+                <p>The answer came immediately. Far too quickly. As though he had been waiting for the question. "Predictability. Safety. Structure. A system that tells them what tomorrow looks like."</p>
+                <p>"And what's wrong with that?"</p>
+                <p>Something changed in his expression. Only for a second. The same expression you would later see on people standing too close to an abyss. On people who had seen gods upclose and still chose to not believe in divinity.</p>
+                <p>"Nothing." He had smiled. A strange smile. One that somehow felt sad. "The problem is that eventually somebody has to build the system."</p>
+                <p>The memory dissolves.</p>
+                <p>You stare at the EEPROM dump. At the fragmented sectors. The corrupted parity blocks. The layers hidden beneath layers. And for the first time since opening the equipment case, a thought occurs to you. Maybe this was never about hiding information. Maybe Hrudaya was showing you how he thinks.</p>
+                <p>The plaintext tracer. The encrypted passphrase. The hidden mechanism beneath the obvious mechanism. A system inside a system. A ring inside a ring. A maze designed by someone who could never leave a puzzle unsolved. The cursor blinks patiently. Waiting.</p>
+                <p>Somewhere inside the damaged memory construct, another secret is waiting to be found. And for the first time in twenty years, you find yourself smiling. Not because you miss him. Because you remember how much fun it used to be trying to keep up.</p>
+                <p>You dive deep into the eeprom bin file. You are awesome. You are the best.</p>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-4" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content custom-modal">
+            <div class="modal-header custom-modal-header">
+                <h5 class="custom-modal-title">Nor In Power</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body custom-modal-body">
+                <p><code>PASSPHRASE ACCEPTED. THE WHITE RABBIT RUNS NO MORE.</code></p>
+                <p>For several seconds the terminal remains completely dark. Not frozen. Waiting. As though some part of it is deciding whether you are permitted to continue.</p>
+                <p>The apartment is silent except for the distant wail of sirens drifting through the chemical fog outside your window. Three nights. Three nights of ambulances. Three nights of official statements. Three nights of Globus assuring the world that everything is normal.</p>
+                <p>You have spent twenty years studying memory. One thing you learned long ago is that people rarely lie by inventing new stories. They lie by repeating old ones until everybody stops questioning them. The world has been listening to the same lie for years.</p>
+                <p>The terminal finally flickers. A single line materializes.<br><code>AIRGAP RELAY ACCESS: PARTIAL</code></p>
+                <p>The phrase strikes you with a strange familiarity. Not because of the technology. Because of him. Twenty years disappear all at once. You remember an evening that should have been ordinary. You two have been quite a thing for quite some time now. A laboratory illuminated by old fluorescent lights. Rain tapping against reinforced windows. The smell of burnt solder. The two of you sitting on opposite sides of a workbench pretending to work while neither of you had looked at your project for nearly an hour.</p>
+                <p>You had asked him why every system he designed seemed isolated from every other system. Why everything he built looked less like engineering and more like a fortress. Without looking up he had replied, "Because eventually everything talks too much." Always that haughty replies.</p>
+                <p>You had laughed. He hadn't. After a long silence he had added, "Anything important should know how to survive alone."</p>
+                <p>At the time you thought he was talking about machines. Now you wonder whether he was talking about himself. Or perhaps about you.</p>
+                <p>The screen updates. Architectural diagrams begin flooding the display. Relay towers. Subsurface fiber networks. Atmospheric monitoring arrays. Emergency response systems. Transportation grids. Power distribution. Water treatment. Medical logistics. The cities of the world unfolds before you like the anatomy of some impossible creature. Every artery. Every nerve. Every organ. All of it converging toward a single destination.</p>
+                <p><strong>GLOBUS</strong></p>
+                <p>You stare. Then stare longer. The realization arrives slowly. Not because it is difficult. Because you do not want it to be true. Globus does not control the world. Globus <em>is</em> the world. The distinction disappeared years ago. The world simply failed to notice. Or perhaps it noticed and found the arrangement convenient.</p>
+                <p>The cursor blinks. A new message appears. Unlike the others, this one carries no system header. No timestamp. No identifier. Just words. Words that sound painfully familiar.</p>
+                <p><em>Power was never their goal.</em></p>
+                <p>Your throat tightens. You read it again. Then a third time. You know exactly who wrote it. Not because of the content. Because of the arrogance. Only Hrudaya could write something so dangerous and believe it was an explanation.</p>
+                <p>Of course it wasn't. That was always the problem. Most people pursue power because they want something. Money. Status. Control. Recognition. Their ambitions have limits. But you don't know what Globus wants, and that was scary, not knowing. And now a flame, your flame from some twenty years ago had gotten himself involved with them, sending you a case from god knows where.</p>
+                <p>He had pursued solutions, yes. And a person pursuing solutions can justify anything. History is full of tyrants who wanted power. It is far more afraid of visionaries. You realise you are worried for Hrudaya, this world doesn't deserve people like him. And now, Hrudaya has gone and settled himself among the elite of the world, among the likes of Tejas Khanna, who will use him and discard him without even using a thought.</p>
+                <p>A second sentence appears beneath the first.<br><em>That is what frightened me.</em></p>
+                <p>For the first time since this investigation began, you feel genuine fear. Not for yourself. For him. Because you remember the man who wrote those words. You remember the nights when he forgot to eat because he was thinking. The weeks when he disappeared into projects nobody else understood. The frightening certainty with which he could dismantle an idea and rebuild it better before anyone else had even understood it.</p>
+                <p>You connect the damaged SDR module recovered from his case. The terminal immediately begins logging milliseconds of raw baseband traffic into a massive diagnostic file. The spectrum analyzer erupts. Noise. Interference. Negative voltage spikes and positive surges. The transmission looks wounded. Like something that has spent twenty years trying not to die.</p>
+                <p>You know how to clean this type of analog noise. Basic things they teach at the university now, but it was you who had discovered it. <strong>Anything above 0.0 Volts is a signal (1). Anything below is silence (0).</strong></p>
+                <p>But beneath the noise, the framing is deliberate. Manchester encoding. He always trusted it for unstable environments. <strong>A HIGH voltage transitioning to a LOW voltage represents a 1. A LOW voltage transitioning to a HIGH voltage represents a 0.</strong></p>
+                <p>Then you notice a rhythm buried deep inside the extracted data. Not random. Intentional. Repeated. A pattern. A sudden memory strikes you with such force that you physically recoil. Hrudaya sitting across from you. Twenty years younger. Tapping his fingers against the table.</p>
+                <p><em>Four short taps. Pause. Two taps. Pause. Three taps.</em></p>
+                <p>Whenever he was nervous. Whenever he was thinking. Whenever he wanted to say something and couldn't. The exact same rhythm is now acting as a cryptographic offset inside the transmission. A repeating cipher.</p>
+                <p>You know if you translate the binary to text, it will be garbled—shifted forward by his nervous habit. You know you will have to reverse it. <strong>Subtract the 4-2-3 rhythm from the raw ASCII values to hear what he is trying to say.</strong></p>
+            </div>
+          
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-5" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content custom-modal">
+            <div class="modal-header custom-modal-header">
+                <h5 class="custom-modal-title">Except The Thought</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body custom-modal-body">
+                <p><code>'RF SYNCHRONIZATION ESTABLISHED. BACKDOOR ACCESS: GRANTED.'</code></p>
+                <p>The relay goes silent. Not because the transmission has ended. Because it has finished saying everything it needed to say. For a long moment you simply stare at the screen.</p>
+                <p>What did he mean by that? Remember him, of course, you remember him, he had came to your life like a wind, yes, and had disappeared from your life like the wind, but yes, you do remember him, you do.</p>
+                <p>The apartment feels smaller than it did an hour ago. Outside, the fog continues swallowing entire blocks of the city. Sirens drift through the night like prayers from a religion that stopped believing in itself years ago. You lean back in your chair and rub your eyes. The relay data scrolls endlessly across the monitor.</p>
+                <p>Routing paths. Authorization keys. Maintenance records. Most of it is meaningless. Then a single file catches your attention. No encryption. No obfuscation. No protection whatsoever. That alone is enough to make you suspicious.</p>
+                <p>The filename contains only three words, three deliberate words. EXCEPT_THE_THOUGHT</p>
+                <p><strong>That is the zip provided, find the flag from among its content, good luck.</strong></p>
+                <p>Your chest tightens. The phrase feels deliberate. Is deliberate. Like part of a sentence. Like something unfinished. You open it. The screen remains blank. Then slowly, letter by letter, text begins to appear.</p>
+                <p>Not data. Not logs. A plain text. A memory. A memory you had long forgotten. A memory he had never.</p>
+                <p>You are standing beneath a railway bridge. Howrah, 21 years ago. Monsoon season. You remember the rain before you remember anything else. The two of you had spent six hours arguing. Not fighting. Arguing. The distinction mattered to him. He used to say that fighting was for people who wanted to win. Arguments were for people who wanted to understand. You hated when he said things like that. Mostly because they sounded pretentious. Partly because they were usually right.</p>
+                <p>The memory continues. Hrudaya sits on the concrete barrier smoking a cigarette he promised he had quit. You are furious. He is smiling. The city lights reflect in the puddles below. You cannot remember what the argument was about. Only the ending.</p>
+                <p>You asking, "What do you even want from all this?"</p>
+                <p>And him answering immediately. Not after thinking. Not after calculating. Immediately. As though he had known the answer all along.<br><strong>"To leave something behind."</strong></p>
+                <p>You had laughed. You remember that. You laughed because the answer sounded absurd. He was twenty-three. Brilliant. Terrifyingly ambitious. Already building things nobody else understood. Of course he would leave something behind. The whole world was waiting for him.</p>
+                <p>He shook his head. And for the first time that night he looked afraid. Actually afraid. You remember it now because you never saw that expression again. Not once. Not even years later. Not even when everything fell apart.</p>
+                <p>The memory ends. The file closes itself. You stare at your reflection in the monitor.</p>
+                <p>The room is silent. Your pulse isn't. You hate him. You suddenly realize that. Not the version you remember. Not the version you loved. This version. The one who left. The one who disappeared. Going who knows where to play god and speak in riddles just because he could. The one who keeps speaking in fragments and riddles because direct honesty apparently remained beneath him until the end.</p>
+                <p>You hate him. And somehow that realization hurts more than grief. A notification appears.<br><code>BACKDOOR TRACE COMPLETE. ORIGIN NODE IDENTIFIED. LOCATION: GLOBUS CENTRAL</code></p>
+                <p>You stop breathing. Everyone knows the building. Nobody enters it. Fifteen years ago it was a conventional corporate headquarters. Now it dominates the skyline like a monument to some forgotten god. A thousand meters of glass and steel. No public records. No internal blueprints. No employee interviews. No verified photographs of the executive floors. No profile of the upper echelon, just the name of the CEO, Tejas Khanna, and now Hrudaya has gone and hid among these monsters just to be a whistleblower, you hate him more, you hate him better now.</p>
+                <p>The relay continues processing. A final message appears. Again, no timestamp. Again, no identifier. Again, you know exactly who wrote it.</p>
+                <p><em>If you are seeing this, then I have already run out of safer ways to reach you.</em><br>The cursor blinks. A second line appears.<br><em>Do not trust anyone inside Globus.</em></p>
+                <p>For the first time since opening the case, genuine fear settles into your stomach. Not fear of Globus. Not fear for the world. Fear for him. Because Hrudaya never wasted words. The screen waits, the cursor blinks as if awaiting an input from you.</p>
+                <p><strong>The final question is "What do you even want from all this?"</strong></p>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-6" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content custom-modal">
+            <div class="modal-header custom-modal-header">
+                <h5 class="custom-modal-title">Of You</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body custom-modal-body">
+                <p>Your name? Your name was the backdoor. You could not really believe it, but then there was no time. The relay map shifts. A route appears. Not a network route. A physical one. A path beginning at your apartment and terminating at a point in the very center of the city. Alongside this a digital verification ID of you for Globus, of Gamma level clearance. And a message.</p>
+                <p><em>This is all I could do, hiding you from everyone, from all the eyes, it's on you now to go to the vaults of the personnel file and hack into the terminal there to get the Omega level clearance, then you know what you have to do.</em></p>
+                <p>And you know, maybe not exactly, but you knew from the moment the hard case was delivered to you, you had to expose all the dirty secrets of Globus, for which Hrudaya is the whistleblower, and maybe, just maybe he had given his life to send that case to you, you could never be certain around Hrudaya, but this feels like it might be the end.</p>
+                <p>The route pulses softly. Waiting. Inviting. For a moment you almost laugh. Twenty years. Twenty years without a letter. Without an explanation. Without a goodbye. And somehow Hrudaya still finds a way to ask you to cross the entire city in the middle of the night.</p>
+                <p>The old irritation returns unexpectedly. You had forgotten how infuriating he could be. The realization comforts you more than it should.</p>
+                <p>Then you see it. Globus Central. Not a building. A verdict. It rises from the city like the Tower of Babel yet here even god was helpless. The lower structure disappears into the ground while the upper levels vanish into the clouds. No advertisements. No logos. No attempt to impress. Only certainty. The kind of certainty usually reserved for religions.</p>
+                <p>Standing before the entrance, you remember another night. Another city. Another lifetime. A younger Hrudaya sitting on the roof of an unfinished laboratory. The two of you watching construction cranes moving across the skyline. You had asked him what he wanted from life. The question seemed absurd even then. He thought for almost five minutes before answering. Not because he lacked an answer. Because he was trying to find one that wouldn't frighten you.</p>
+                <p>Eventually he had said, "I want you."<br>You had laughed. Of course he did. Every young fool in love says something similar. You had expected him to talk about companies. Research. Awards. Discovery.</p>
+                <p>Instead he had looked toward the horizon and had quietly added, "The terrifying part is that I don't think I can ever have you."<br>At the time you had thought it was arrogance. Standing before Globus Central, you finally realize it was fear.</p>
+                <p>The doors open before you reach them. No guards stop you. No checkpoints flare you. No questions were asked to you. The system already knows who you are. Somewhere deep inside the building your name has been waiting for ten some years. The realization feels less like safety and more like haunting.</p>
+                <p>Hours pass. The maintenance route guides you deeper. Lower. Past rooms filled with quantum processors. Past walls displaying simulations of entire cities. Past server chambers so vast they resemble cathedrals. This is where the entire world was shackled to the behemoth of Globus. Again and again the same thought returns.</p>
+                <p>Not admiration. Not horror. But grief. Because every hallway bears his fingerprints. Every elegant solution. Every impossible optimization. Every beautiful piece of engineering. The entire building speaks in his language. And yet he is nowhere to be found.</p>
+                <p>The route terminates. One final security door slides open. Beyond it waits the personnel archive. The deepest employee records in Globus history. The place where names become facts. Where memory becomes evidence. You take a breath. And begin searching.</p>
+                <p>You search for Hrudaya. Nothing. No aliases. No matches. No references. No trace. The absence feels unnatural. Not the absence of a man. But the presence of a deliberate removal. As though somebody reached backward through history and erased him.</p>
+                <p>Then another file catches your eye. One record. Locked behind the highest security classification in the entire database. A profile that appears everywhere. Every organizational structure. Every strategic directive. Every executive authorization chain. Every classified project.</p>
+                <p>TEJAS KHANNA.<br>Chief Executive Officer.<br>Global Clearance: OMEGA.</p>
+                <p>You click on it. ACCESS DENIED. CLEARANCE LEVEL: OMEGA REQUIRED.</p>
+                <p>You reach into your coat and pull out the offline beat up terminal kiosk, and the logic analyzer it came with, you plug it in, you get two files. <strong>The files are in the zip, find the hexadecimal UART passcode.</strong></p>
+                <p>You enter the code. ACCESS GRANTED. You open the file. The personnel photograph begins loading. Line by line. Pixel by pixel. Slowly. Painfully. Your reflection stares back from the dark portions of the screen.</p>
+                <p>And for the first time since opening the equipment case, genuine fear enters your heart. Not fear of Globus. Not fear of the world. But fear of what you might discover. This is always something worse. Recognition. Because before the image has even finished rendering, you already know that you have seen that face before.</p>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-7" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content custom-modal">
+            <div class="modal-header custom-modal-header">
+                <h5 class="custom-modal-title">During The Time Of</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body custom-modal-body">
+                <p>There was a ding from an elevator.</p>
+                <p>Hrudaya was Tejas. Tejas was Hrudaya. This felt like a punch in the gut, the man you have been trying to find these past few days, a man you have trying to forget for the last twenty years, obviously he is the the most influential man in the world right now, the gods were never more crueler with you, and now you know why.</p>
+                <p>You don't know when you had entered an elevator, your legs seemed to take themselves out. The elevator rises. Slowly. Deliberately. As though even the machinery understands what waits at the top. The transparent walls reveal the city beneath her. The city she once loved. The city she once believed was permanent.</p>
+                <p>From this height it resembles a circuit board. Millions of lives reduced to points of light. Roads become traces. Buildings become components. People become noise. Perhaps that was the real danger. Not power. Perspective.</p>
+                <p>The farther away you stand from humanity, the easier it becomes to mistake suffering for statistics. She wonders when Hrudaya, she refused to call him Tejas Khanna, last climbed this elevator. Twenty years ago? Ten? And never left his gilded throne room. Yesterday? How many times had he watched this same city from above? How many compromises had been made up here? How many excuses? How many necessary evils? The thought settles heavily inside her chest.</p>
+                <p>Because she knows something now that she did not know an hour ago. He never disappeared. Not really. That would have been easier. The truth is crueler. He stayed. He watched. He built. He transformed. While she mourned. While she hated him. While she convinced herself he was gone.</p>
+                <p>He was here. Always here. The realization feels almost obscene. Like discovering a grave you've visited for twenty years was never occupied to begin with.</p>
+                <p>The floors empty. One by one. Researchers. Engineers. Assistants. Advisors. Entire governments have waited months for meetings on this floor. Tonight it belongs to silence. The last employee pauses at the door. Uncertain. Nervous. Young. Far younger than he feels.</p>
+                <p>"Sir?" Tejas does not turn. The city remains beyond the glass. Fog swallowing entire districts. Lights flickering beneath the haze. Beautiful. Broken. His favorite kind of things.</p>
+                <p>"Yes?"<br>His secretary from the last twenty years hesitates. Then speaks in a lowly voice, "Is there anything else you need?"</p>
+                <p>The question hangs in the air. Anything else. Twenty years ago he would have laughed. Twenty years ago he would have had requests. Twenty years ago he would not have believed that he would have employees, specifically catering to his every whims. He wanted to laugh.</p>
+                <p>Now he only has consequences. "No." Tejas says with a finality that only the dead know.</p>
+                <p>The secretary nods. She leaves. The door closes.</p>
+                <p>For the first time in years Tejas is completely alone. And discovers he hates it exactly as much as he remembers. He hates to be alone, he hates when the voice in his head grow louder and seem to drown him, he hates being the centre of the show but there he is, in the greatest show to be ever shown, he had influenced goverments, he had killed people without even having second thoughts, he had stopped wars before they had even begun, he had ruled, from the shadows, yes, but he had ruled, yet he is completely alone, and he did not like it. Well, company was coming, he had dreamt of finally meeting her, finally being able to defend himself, finally being seen, being understood, being loved.</p>
+                <p>The service terminal activates. Awaiting instruction. He stares at it. Then at the empty chair across the room. Then back at the city. A strange realization arrives.</p>
+                <p>The most powerful man on Earth is nervous. About dinner. The absurdity almost makes him smile. Almost. He had lost his ability to laugh now, the raucous laughter that used to echo across rooms, he had not laughed in some twenty years.</p>
+                <p>"Prepare a table."<br>The machine acknowledges, "For how many?"</p>
+                <p>For several seconds he says nothing. Then, quietly, almost devotionally, "Two." The answer feels impossible. The answer feels dangerous. The answer feels twenty years overdue.</p>
+                <p>The machine requests preferences. He closes his eyes. And immediately regrets it. Because memory is waiting. They are always waiting.</p>
+                <p>The elevator begins slowing. The final ascent. The final stretch. No more archives. No more clues. No more recordings. No more ghosts. Only truth. And for the first time since this began, she realizes she does not know what she wants. She thought she did. Expose Globus. Find Hrudaya. Save him, and then what, be his lover? Learn the truth, yes that sounded good, enough for now.</p>
+                <p>Simple. Clean. Rational. Instead she found something infinitely worse. A man. Still alive. Still brilliant. Still infuriating. Still capable of making her feel twenty-two years old with a single memory.</p>
+                <p>The seemingly broken terminal blinks. You expected a password. Or another protocol. Or another final command. Or anything else for that matter. But the terminal spouts an invite, an invite for dinner, an invite from the most powerful of man, an invite from the most foolish of man, an invite of twenty years of grief, an invite of twenty years of waiting.</p>
+                <p><strong>The files the terminal gets are uploaded, you may use them to find the flag.</strong></p>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-8" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content custom-modal">
+            <div class="modal-header custom-modal-header">
+                <h5 class="custom-modal-title">The Rise of Globus</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body custom-modal-body">
+                <p>The doors opened. For a moment, you think you had entered the wrong room. This was no command center. This was no throne room. There were no walls of screens tracking the world.</p>
+                <p>Only a table. With a chair for one, now repurposed with two chairs. Dinner for two. And Tejas Khanna. No, Hrudaya, you will never call him by that name, he was Hrudaya, always will be, for you.</p>
+                <p>Not the CEO of Globus. Not the most powerful man on Earth. Just Hrudaya. Older, yes, 20 years was a long time, it was more than the time you had spent with him. Thinner, probably, you had no measure. Tired in ways sleep could never repair.</p>
+                <p>He stood when you entered. For a second neither of you spoke. Twenty years is a long time. Long enough for love to become memory. Long enough for memory to become mythology. Long enough for mythology to become legends. Long enough for two people to forget that the other was once real.</p>
+                <p>Then he smiled. And you hated him for it. Because it was the same smile. The exact same smile. That exact "I know everything and I can make you understand if you give me enough time" smile. The one that used to appear whenever he had solved a problem nobody else even understood. The one she had spent twenty years trying to forget.</p>
+                <p>"Hi! It's me again." The words struck harder than any accusation.</p>
+                <p>You said nothing. Neither did he. The city glowed beyond the glass. Billions of lights. Billions of lives. The world he had built. The world she had come to destroy.</p>
+                <p>You laughed. Not because it was funny. Because it wasn't. Because the alternative was crying.<br>"Dinner?" you repeat, incrediously aware of him now in the same room as you for the first time in nearly twenty years.<br>"Twenty years seemed a little long for coffee," he pivoted, as smoothly as he had done some twenty years back, but now he had an edge, a hard edge.</p>
+                <p>For a moment you almost smiled. Almost. Then you remembered why you were here. The smile died. Something inside him seemed to die with it. He sat. Slowly. As though carrying invisible weight. As though he had been carrying it for decades.</p>
+                <p>The table sat between them. Dinner was left untouched. Steam long gone. Twenty years late. Neither of you seemed hungry. For a long while neither of you spoke.</p>
+                <p>Finally, you laughed. A shrill laugh. A laugh to bite at him. A single bitter sound.<br>"Hrudaya."<br>He looked up. She hated that she still knew exactly what his eyes would look like.</p>
+                <p>"I spent twenty years imagining this," he sprawls his arms in a wide manner, as if to encompass everything, "I wanted everything to be perfect."<br>"I know."<br>"No, you don't." The words came sharper than intended, he seemed guilty of it all, his eyes said it so.</p>
+                <p>"Do you know how many times I buried you?" you began. The city remained silent. "I buried you when your number stopped working." Nothing. "I buried you when your apartment was empty." Nothing from his side, no moments. "I buried you when even the government stopped sending bills in your name." Still not a single yew of emotion on his face. "I buried you every year after that."</p>
+                <p>His eyes lowered. From guilt. From recognition. This made you angrier.<br>"And all this time..." She gestured around them. The tower. The city. The country. The world. The empire. "...you were here."</p>
+                <p>Hrudaya looked through the glass. Toward the world. His world.<br>"I was." he said it simple, a single confirmations as if it made anything right.<br>"Why?" A simple question really. The oldest one, the one that started it all. The one that made empires, whorehouse, kings, and beggars. The one that mattered.</p>
+                <p>For the first time that evening he seemed tired. Not physically. Spiritually. Like a man carrying an answer too heavy to lift anymore.<br>"Because I saw what was coming."</p>
+                <p>You scoff at this. You have had enough of his overflowing egoistic talks. So, you just say, "Of course you did."<br>"I did." The certainty in his voice was infuriating. Always had been. He continued, not knowing the sarcasm, if he knew, he didn't give any outward sign of it, "I saw the shortages." He spoke quietly. "The climate collapse projections. The water crises. The migration waves. The resource wars. The wars for oil, for the very thing that destroys this land. The rise of AI and the weaponization of information. I saw every curve bending toward catastrophe."</p>
+                <p>"And?" you were impatient at him, on him, for him.</p>
+                <p>"And nobody cared." The words hung in the air. He leaned forward. Not as a ruler. As a witness. He rumbled on, "I watched governments spend decades negotiating disasters they already understood. I watched corporations optimize humanity into a spreadsheet. I watched people choose convenience over survival every single time."</p>
+                <p>His gaze shifted toward the city. Toward billions. "Do you know what I learned?"<br>You say nothing.<br>"Humanity never chooses freedom over comfort." His voice remained calm among all this, almost gentle, "It only pretends it would." Silence.</p>
+                <p>The statement settled between them like poison. Then you shook your head.<br>"No."<br>He frowned. "No?" he repeated.<br>"No." You leaned forward now. Matching him. You continued on, "You don't get to do that."<br>"Do what?"<br>"Reduce people," your voice cracked unexpectedly, "god, you've always done this."</p>
+                <p>He said nothing.</p>
+                <p>So, you continue on, "You look at humanity and see systems. You look at suffering and see trends. You look at people and see outcomes." The city glowed below. Indifferent. "You stopped seeing people a long time ago."</p>
+                <p>Something flickered across his face. Pain. Gone almost immediately.<br>"I see them more clearly than anyone."<br>"No." The word came instantly from your mouth. "No, you don't."</p>
+                <p>Silence. Long. Heavy. Then he smiled. A sad smile. One that made him look older than any of the gray in his hair.<br>"You look at Globus and see a prison," he motioned towards the whole room, his eyes drifted toward the skyline. The infrastructure. The power. The systems keeping entire nations alive. "I look at it and see the only reason this world is still standing."</p>
+                <p>You laughed. Actually laughed. The sound hurt. "Listen to yourself," you beg of him finally.<br>"Hear me," he begs back at you, both of you at an impasse, both of you unyielding.</p>
+                <p>"No." Your voice rose, you don't even notice it. "No, Hrudaya."<br>The old name landed between them. For a moment neither of you could say anything. "You built a machine so large it swallowed you."</p>
+                <p>His expression tightened. Barely. Enough.<br>"You disappeared." You point at him. "You abandoned everyone who loved you." Nothing. "You built an empire nobody wanted." Nothing. "You made decisions for billions of people who never knew your name, not Tejas Khanna, Hrudaya is what you are and always will be." Nothing. "And somehow you've convinced yourself that makes you noble."</p>
+                <p>The room fell silent. The city continued shining. Below them ambulances moved through poisoned streets. Above them stars hid behind pollution.</p>
+                <p>Finally he spoke. Not defensively. Almost sadly.<br>"Chandragupta built an empire." You close your eyes. Not this. Not history. Not philosophy. Not another wall. He seemed to not notice it, "Newton rewrote the laws of reality." His voice remained level throughout. "Oppenheimer split the atom." His eyes met hers. "Nobody remembers the people who told them to stop."</p>
+                <p>The words echoed. Not arrogance. Conviction. Which was worse. Much worse. Because arrogance could be argued with. Conviction could not. You can argue with a professor, but not with a zealous harlot.</p>
+                <p>For the first time you understood. There was no saving him. Not because he was evil. Because he genuinely believed he had become necessary. The realization broke something inside her. Not loudly. Quietly. The way ice cracks beneath deep water. She looked at him. Really looked. At just a tired man sitting alone at the top of the world.</p>
+                <p>And suddenly a memory surfaced. A laboratory. They had spent most of their time in the laboratory, what little time was spent in eachother's bed. Rain. Coffee. Yes, it was everywhere. Twenty years ago. Your voice. Young. Careless. Cruel in the way only truth can be.</p>
+                <p>"I think you're not afraid of being wrong, Hrudaya." Silence had followed then. The memory sharpened. "I think you're afraid of being happy."</p>
+                <p>Back then he had said nothing. Now he looked away. Toward the city. Toward the thing he had chosen instead. And for the first time all evening you saw it. Not power. Not certainty. Not greatness. Fear. Ancient. Unresolved. Unhealed. Twenty years old. And still alive.</p>
+                <p>The same fear that had walked out in the middle of the night and never returned. The same fear that had built Globus. The same fear sitting across from her now. The room suddenly felt very small. The empire very distant. The gun very close. And neither of them could think of anything left to say.</p>
+                <p>"I know what you've come to do," he offered an opening, for anything really, it seemed he was as starved for your attention as he was for your validation.<br>"I doubt that."<br>"I sent you the case," he took one bite out of a mushy roll, sauces spilling, he spoke chewing, he was messy, "I have known about that split personality of mine for quite some time."</p>
+                <p>The silence that followed felt endless. Neither looked away. Neither surrendered. The city burned quietly beneath them.<br>You laughed again. A crueler sound this time. "You built a prison and called it salvation, even so much that you wanted to escape. Did you really leave me, sacrifice everything for all this?" you plead, the last time, for his sake, for your sake.<br>"No." He looked away. Toward the city. Toward the thing he had sacrificed everything to create.</p>
+                <p>"I built a future...." Then he spoke. Not to persuade her. Not really. People like him never explained themselves to others. Only to themselves. And perhaps that was the tragedy. His voice grew quiet. Almost distant. As though speaking to a younger version of himself. As though speaking to ghosts.</p>
+                <p>“…..Calm. Kindness. Kinship. Love. I gave up all chance at inner peace. I made my mind a sunless space. I shared my dreams with ghosts. I woke up every day to an equation I wrote 25 years ago from which there was only one conclusion, I was damned for what I will do. My anger, my ego, my unwillingness to yield, my eagerness to fight, they set me on a path from which there was no escape. I yearned to be a savior against injustice without contemplating the cost and by the time I looked down there was no longer any ground beneath my feet. What was my sacrifice? I was condemned to use the tools of my enemy to defeat them. I burnt my decency for someone else’s future. I burnt my life to make a sunrise that I know I’ll never see. And the ego that started this fight will never have a mirror or an audience or the light of gratitude. So what did I sacrifice? Everything!”</p>
+                <p>Silence. The room seemed smaller afterward. As though the confession had consumed the oxygen. You stare at him. At the man she had loved. At the man she had hated. At the man who had become a stranger and somehow remained himself.</p>
+                <p>Finally he spoke again. Not as Tejas. Not as a leader. Not as a visionary. Not as a king. Not as a fool. As a man making a final argument. A final plea. A final mistake.<br>"Join me."</p>
+                <p>The words hung between them. Absurd. Impossible. Heartbreaking. Join me. As though twenty years had never happened. As though abandonment was a misunderstanding. As though love could survive becoming this. Just absence. Twenty years of absence. Twenty years of silence. Twenty years of grief.</p>
+                <p>And now here they were. Exactly where that moment had always been leading. Back at the table. Back at the choice. Back at each other.<br>"If you have noticed, our relationship has changed a lot since last twenty some years and it's not what it used to be," you use those words as the cackling whips, for him, and they work.</p>
+                <p>His face tightened. Barely. But you saw it.<br>"I feel like you want something that I can't give." You continue to drive the point home. The city remained silent below. The world waited. "So some things are good left in the past." You finish with nothing in your hands but bloods of whatever kinship you may have had with him.</p>
+                <p>For the first time that evening Hrudaya looked defeated. Not because you had won. Not because you had hurt him. Because he knew she was right. And because being right changed nothing.</p>
+                <p>For the first time that evening, he laughed. A small laugh. A tired laugh. The laugh grew. The laugh echoed. The same laugh he used to buster around all those years back. The laugh of a man with nothing to lose.<br>"Still predictable." he said between those laughs. He reached into his pink coat, his favourite colour, you know, you remember that much.</p>
+                <p>Your hand immediately reaches towards the gun beneath yours. The movement was instinctive. His eyes flickered downward. Towards the weapon. Near your breast. Under that snow white coat of yours. Then back to you. Not fear. Recognition.</p>
+                <p>As though a piece had finally arrived where it was always meant to be. Slowly, from inside the coat he withdrew something no larger than a deck of cards. Black. Featureless. No ingravings. Nothing to give it away.</p>
+                <p>A sealed storage module, with a screen on top of it. Who does that anymore, you think. The screen came alive suddenly. One line waited there. Not a password. Not an instruction.</p>
+                <p><code>the_white_rabbit_sees</code></p>
+                <p>The it disappered as suddenly as it had come, a garbling of lines followed that, some you had no sense of, some you knew instictively, and it waited as if wanting something from you.</p>
+                <p>You know it instictively. You know it as if by religion. You know it as if by love. You know it as if by conviction.</p>
+                <p><strong>You know the password but you don't, which is why we have made this easier for you to get the password, which is also the flag for this. You may guess but we don't recommend it. Please check the html file.</strong></p>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-9" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content custom-modal">
+            <div class="modal-header custom-modal-header">
+                <h5 class="custom-modal-title">And The Fall Of Me</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body custom-modal-body">
+                <p>"Goodbye," his voice is raspy, a finality is overflowing there, as if he has now done what he intended to do for sometime. People like him could always see, no, no, predict the future was a more apt way of describing it.</p>
+                <p>"What? Why?" you had nearly said those words when the storage module unlocked with a soft click, for a moment nothing happened, then the screen came alive.</p>
+                <p>Directories unfolded across the display. Executive archives. Environmental audits. Internal correspondence. Buried projections. Weapons. Deathstars. Plasma Guns. Spaceships. Grain Barages. Better farming techniques. Crops that could feed continents. Machines that could poison them. The mathematics of salvation. The mathematics of extinction. Also secrets enough to collapse governments. Enough to bury Globus forever. At the very top sat a final file. Not encrypted. Not hidden. Waiting.</p>
+                <p>You opened it. A single line appeared.<br><code>OMEGA RELEASE UNLOCKED. SHADOW PROTOCOL ENGAGED. GLOBAL DISCLOSURE PENDING. CONDITION: BIOSIGNATURE ABSENT. SUBJECT: TEJAS KHANNA.</code></p>
+                <p>You read it once. Then again. Then a third time. The words did not change. His words never do. Whatever he says is a finality in itself. Slowly, very slowly, you raised your eyes from the screen. He was watching you.</p>
+                <p>Not at all surprised. Not afraid. Waiting. The way a condemned man waits for a verdict he already knows. Outside the glass, the city glittered beneath the night. A civilization balanced upon invisible foundations. A civilization built by the man sitting across from you. A civilization that could not move forward while he remained alive. The realization settled over you with the terrible inevitability of dawn.</p>
+                <p>The case. The relay. The clues. The terminal. The gun. The dinner. The goodbye. Every step. Every choice. Every breadcrumb. Not a cry for help. A procession. A drama. A eulogy. A road leading here. To this room. To this moment. To you.</p>
+                <p>The gun suddenly felt heavier. "Why?" Your voice emerged as little more than a whisper. For the first time that evening, he looked away from you. There were a lot of first times here, 20 years was enought for the rise and fall of empires, you two were mortals still, he may think of him as a god, but he was a man, just a man, a mad man with a pen.</p>
+                <p>Not toward the city. Not toward Globus. Toward the untouched dinner. Toward the second chair. Towards you. Toward the life that never happened.</p>
+                <p>When he finally spoke, his voice sounded older than the rest of him. "Because Tejas Khanna cannot destroy Globus." Then silence. The machinery of the tower hummed around you. Ancient as breathing. "Tejas Khanna is Globus."</p>
+                <p>The words hung between you. Simple. Absolute. Religious. God would himself smite him for his pride.</p>
+                <p>"I built something larger than myself." A faint smile touched his lips. A knowing smile. As if he would finally be free. The smile of a man who had spent twenty years discovering the price of being right. "And then one day I discovered it no longer needed me."</p>
+                <p>You stare at him. At the architect. At the emperor. At the god. At the prisoner.<br>"Hrudaya would have stopped," you find yourself speaking, "he would have stopped way before."<br>His smile vanished. "Yes." The answer arrived immediately. Without defense. Without hesitation. Without mercy. "He would have stopped. But he didn't and now, you are stuck with me."</p>
+                <p>The room fell silent. The city burned with light below. Millions of lives. Millions of strangers. People who would never know his name. People who would curse it. People who would owe their lives to him. People who would never know it.</p>
+                <p>"No," you found yourself saying, you no longer wanted to be a pawn, to whatever sick game he was playing, or wanted to play. "I will not let you be a martyr, let you be a hero, let you win."<br>"Win?" he began, his voice deep, angry now, as if you are a errant child who cannot understand, "Is that what you think it's about? I'm not trying to win. I'm not doing this because I want to beat someone, or because I hate someone, or because, because I want to blame someone. It's not because it's fun and God knows it's not because it's easy. It's not even because it works, because it hardly ever does. I do what I do, because it's right! Because it's decent! And above all, it's kind. It's just that. Just kind. If I run away today, good people will die. Good people are dying. I have their blood on my hands. Hey, you know, maybe there's no point in any of this at all, but it's the best I can do, so I'm going to do it. And I will stand here doing it till it kills me. Who I am is where I stand. Where I stand, is where I fall. Stand with me, please. Give me this one mercy."</p>
+                <p>Outside, the city continued to shine. Silence. Inside, two people sat at the end of a twenty-year road. Silence. The gun rested beneath your hand. Silence. The archives waited on the screen. And between them sat a man who had spent half his life teaching humanity how to survive. Silence. Only to discover that the final lesson required his absence. Silence. Neither of you spoke. Silence. There was nothing left to explain. Only a choice. And both of you already knew what it would be.</p>
+                <p>The silence broke with a chime from the terminal.<br><code>BIOSIGNATURE LOST. OMEGA RELEASE INITIATED.</code></p>
+                <p>The handgun never made a sound, it was designed as such. The end of an empire. The end of its emperor. The end of his love.</p>
+                <hr>
+                <p>You don't know how much time you spent with the ice cold body of him. Blood had seeped into his shirt, then into his pink coat. All that blood was never beautiful, it was just red, and you assume you can make it into a poem. You remember thinking how mad he will be that his coat was bloodied, he was dead, you still couldn't believe it, it was you who had did though, a final mercy, he had called. You had cradled his head in your bosom, you had screamed his name, not Tejas, never Tejas, Hrudaya, he would have liked it, you know.</p>
+                <p>Moments had passed, moment too long for you, moment too short for you, moment you wanted to end as soon as possible, moment you wanted to stretch out indefinitely.</p>
+                <p>You were arrested as soon as one government or the other finally got its wit around and the balls to go against Globus, even then they were afraid of the dead empire, its emperor. You were put before a judge that very day, a jury was already there, a panel of your peers, there eyes accusing, and suprisingly, you were acquitted the same day. The court house was flooded with lawyer's in black shirts and white coats, all under the payroll of Globus, that was the part that suprised everyone, they defended you from the start to the end, they had one mission and one mission only, to not let you see even one day in some holding cell or room, and they were damn good with what they did, you were acquited with the cause of self defence, defence on your part or for the world, you did not ask.</p>
+                <p>That was five years ago. People often imagine that history announces itself. That there is a clear division between before and after. There isn't. The next morning still arrived. The sun still rose. Somebody somewhere still burnt their breakfast. Some child still missed a bus. Some man still lied to his wife. The world did not end. History rarely grants us such conveniences. Instead it continued. Messily. Painfully. Humanly.</p>
+                <p>The trials lasted years. The arguments continue still. The newspapers could never decide whether he had been a monster or a martyr. They wanted him to be one thing. History rarely grants such luxuries. He had fed continents. He had poisoned cities. He had prevented wars. He had hidden truths. He had saved billions. He had ruined millions.</p>
+                <p>The dead remained dead regardless of which conclusion the historians preferred. The archives had spread across the planet within hours. Governments fell. Cabinets resigned. Generals disappeared. Kings disposed. Beggars clamoured. Charlatans celebrated. Entire industries collapsed beneath the weight of truths they had spent decades suppressing. There were riots. There were trials. There were funerals. There were celebrations.</p>
+                <p>There were people who called Tejas Khanna a monster. There were people who called him a martyr. There were people who insisted he had saved civilization. Others insisted civilization needed saving from him. History, as usual, proved unwilling to take sides.</p>
+                <p>The technologies changed everything. Some of them should have remained buried. Others should never have been hidden. Fusion reactors. Atmospheric restoration systems. Orbital kinetic strike platforms. Medical treatments decades ahead of public research. AI directed drone swarms. Agricultural architectures capable of feeding entire continents. The world had inherited miracles. And nightmares. As it always had. Only now both sat in plain sight. All the countries had the blueprints of the war systems, everything they needed, but they had no money and neither did they have the manpower to build anything, when you had mouths to feed, you cannot afford to build weapons of mass destructions.</p>
+                <p>The world miraculously improved. Slowly. Painfully. Like a broken bone. The technologies hidden within the archives changed everything. There are fewer hungry people now. Fewer wars. No wars, basically, no body can afford them. Cleaner skies. Longer lives. Children are growing up beneath futures that would have sounded impossible once. Hope exists again.</p>
+                <p>You should be pleased. Sometimes you even are. Then you remember the cost.</p>
+                <p>The strange thing was that Globus survived. Not as an empire. Not as a government. Not as a god. But as infrastructure. The bones remained after the giant died. Most nations were poorer than they cared to admit. Many had quietly relied upon Globus for far more than anyone had imagined. The years afterward were difficult. Perhaps harder than people expected. Freedom often is. Yet for the first time in a long while, the future belonged to nobody. The present remained bleak though, but there was hope.</p>
+                <p>You inherited something from Globus. That was perhaps the cruelest joke. Accounts hidden across continents. Trusts buried beneath shell corporations. Emergency reserves worth more money than some countries were worth now. All of it yours. All of it untouched. You never spent any of it. Not because you feared it. Because it felt like grave robbing.</p>
+                <p>Sometimes journalists still ask what he was really like. You never answer. There is no answer. There are only stories. And stories have never survived contact with reality.</p>
+                <p>And now, three months ago, a package had arrived. No return address. No sender. No explanation. You laughed when you saw it. You laughed because there was only one man in history capable of sending mail five years after his own death. Inside sat an old storage drive. Nothing more. No instructions. No passwords. No riddles.</p>
+                <p>The recording begins with silence. Then a chair scraping. Then breathing. Then his voice. Young. Careless. Alive. A voice untouched by empires. Untouched by Globus. Untouched by Tejas Khanna. Only Hrudaya.</p>
+                <p>For a moment you cannot listen. For a moment you hate him again. The arrogance of it. The sheer selfishness. To leave twenty years ago. To die five years ago. And somehow continue arriving in your life anyway. Then he laughs. And suddenly he is twenty-two again. And so are you. And the laboratory still exists. And the rain is still falling. And none of the tragedies have happened yet. Memories no longer mattered now.</p>
+                <p>"Hi! It's me again," the recording starts. A pause. A nervous laugh. "I knew one thing though, I wasn't going to start by complimenting your brown eyes." Another pause. Longer.</p>
+                <p>"I miss you." in his raspy, laughter filled voice. You stop the recording. Not because you cannot continue. Because you can. And that somehow hurts more. Outside, the world continues toward its future. Inside, a dead man waits patiently inside a machine. One recording at a time. One letter at a time. One memory at a time.</p>
+                <p>And for the first time in years, you find yourself looking forward to tomorrow.</p>
+                <p><strong>This is the end, hold your breath and count to ten, feel the earth move and let the sky fall, when it crumbles, we will stand tall, face it together, you may have my number, you can take my name, but you will never have my heart.</strong></p>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let lastScrollTop = 0;
+    const navbar = document.getElementById('main-nav');
+
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // If scrolling down AND past the height of the navbar
+        if (scrollTop > lastScrollTop && scrollTop > 80) {
+            navbar.style.transform = 'translateY(-100%)'; // Hide navbar
+        } else {
+            navbar.style.transform = 'translateY(0)'; // Show navbar
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+    });
+</script>
+
+</body>
+</html>

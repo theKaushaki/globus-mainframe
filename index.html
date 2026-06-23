@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Shadow Protocol</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="http://20.196.65.215/files/b4171802b5851d1ca67bd0926b0a544a/WhatsApp_Image_2026-05-29_at_17.49.08.jpeg" type="image/x-icon">
+
+  <link rel="stylesheet" href="themes/core/static/assets/main.e9ec7884.css">
+  <script src="themes/core/static/assets/color_mode_switcher.52334129.js"></script>
+
+  <!-- Added Lora font for the unified Navbar typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Parisienne&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <script type="text/javascript">
+      window.init = {
+          'urlRoot': "",
+          'csrfNonce': "f782d8e11263fb48cfc0995b8b393d8cf10deac6b87a8a79a6831d649390b5a0",
+          'userMode': "teams",
+          'userId': 0,
+          'userName': null,
+          'userEmail': null,
+          'userVerified': null,
+          'teamId': null,
+          'teamName': null,
+          'start': 1780739400,
+          'end': null,
+          'themeSettings': {"challenge_category_order": "", "challenge_order": "", "challenge_window_size": "xl", "use_builtin_code_highlighter": true},
+          'eventSounds': [
+            "/themes/core/static/sounds/notification.webm",
+            "/themes/core/static/sounds/notification.mp3",
+          ],
+      }
+  </script>
+
+  <style id="globus-omega-theme">
+
+/* ---------- GLOBAL ---------- */
+body {
+    background: #090909 !important;
+    color: #d7d0c7 !important;
+    font-family: "Inter", sans-serif !important;
+}
+
+/* ---------- CUSTOM NAVBAR (Synced with Challenges) ---------- */
+.custom-navbar {
+    background: rgba(9, 9, 9, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(176,141,87,.15) !important;
+    padding: 15px 0;
+    transition: transform 0.4s ease-in-out;
+}
+
+.navbar-brand {
+    font-family: 'Lora', serif !important;
+    color: #d7d0c7 !important;
+    font-size: 1.1rem !important;
+    font-weight: 400 !important;
+    text-transform: uppercase !important;
+    letter-spacing: .15em !important;
+    text-shadow: none !important;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.custom-nav-link {
+    font-family: 'Lora', serif;
+    color: #d7d0c7 !important;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    transition: 0.3s ease;
+    padding: 8px 15px !important;
+}
+
+.custom-nav-link:hover,
+.navbar-brand:hover {
+    color: #b08d57 !important;
+    transform: translateY(-2px);
+}
+
+.navbar-toggler {
+    border-color: rgba(176,141,87,.4) !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28176, 141, 87, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* ---------- GENERAL COMPONENTS ---------- */
+.jumbotron {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    min-height: auto !important;
+}
+
+.jumbotron h1,
+.jumbotron h2 {
+    margin: 0 !important;
+    font-size: 2rem !important;
+}
+
+/* ---------- LINKS ---------- */
+a {
+    color: #b08d57;
+    transition: all .25s ease;
+}
+
+a:hover {
+    color: #d0ae73;
+    text-decoration: none;
+}
+
+/* ---------- CARDS ---------- */
+.card,
+.modal-content {
+    background: linear-gradient(180deg, #171411, #0f0d0c) !important;
+    border:1px solid rgba(176,141,87,.22) !important;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 50px rgba(0,0,0,.45), 0 0 40px rgba(176,141,87,.03);
+    color: #d7d0c7 !important;
+}
+
+.card-header,
+.modal-header {
+    background: rgba(0,0,0,.25) !important;
+    border-bottom: 1px solid rgba(176,141,87,.12) !important;
+    color: #d7d0c7 !important;
+}
+
+/* ---------- CHALLENGE CARDS ---------- */
+.challenge-button {
+    background: rgba(176,141,87,.03) !important;
+    border: 1px solid rgba(176,141,87,.15) !important;
+    color: #d7d0c7 !important;
+}
+
+.challenge-button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(176,141,87,.35) !important;
+    box-shadow: 0 10px 30px rgba(176,141,87,.08);
+}
+
+/* ---------- BUTTONS ---------- */
+.btn-primary,
+.btn-info,
+.btn-success,
+.btn-dark {
+    background: #b08d57 !important;
+    border: none !important;
+    color: #090909 !important;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.btn-primary:hover,
+.btn-info:hover,
+.btn-success:hover,
+.btn-dark:hover {
+    background: #c9a267 !important;
+    color: #090909 !important;
+    box-shadow: 0 0 20px rgba(176,141,87,.25);
+}
+
+/* ---------- SECONDARY BUTTONS ---------- */
+.btn-outline-secondary,
+.btn-outline-light {
+    background: transparent !important;
+    border: 1px solid rgba(176,141,87,.35) !important;
+    color: #b08d57 !important;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-light:hover {
+    background: rgba(176,141,87,.05) !important;
+    color: #d7d0c7 !important;
+}
+
+/* ---------- INPUTS ---------- */
+.form-control {
+    background: rgba(255,255,255,.02) !important;
+    border: 1px solid rgba(176,141,87,.12) !important;
+    color: #d7d0c7 !important;
+}
+
+.form-control:focus {
+    background: rgba(255,255,255,.03) !important;
+    border-color: rgba(176,141,87,.45) !important;
+    box-shadow: 0 0 20px rgba(176,141,87,.12) !important;
+}
+
+/* ---------- TABLES ---------- */
+table {
+    color: #d7d0c7 !important;
+}
+
+thead th {
+    border-bottom: 1px solid rgba(176,141,87,.35) !important;
+    color: #b08d57 !important;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: .8rem;
+}
+
+tbody tr:hover {
+    background: rgba(176,141,87,.03);
+}
+
+/* ---------- SCOREBOARD ---------- */
+.scoreboard tr {
+    border-color: rgba(176,141,87,.08) !important;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+    color: #5c554d !important;
+    border-top: 1px solid rgba(176,141,87,.08);
+    margin-top: 4rem;
+}
+
+/* ---------- SCROLLBAR ---------- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #090909; }
+::-webkit-scrollbar-thumb { background: rgba(176,141,87,.35); border-radius: 20px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(176,141,87,.55); }
+
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md custom-navbar fixed-top" id="main-nav">
+  <div class="container">
+    <a href="index.html" class="navbar-brand">
+      The Shadow Protocol
+    </a>
+
+    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#base-navbars" aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <ul class="navbar-nav mx-auto w-100 justify-content-evenly mt-3 mt-md-0">
+          <li class="nav-item">
+          <a class="nav-link custom-nav-link" href="challenges.html">Their Story</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link custom-nav-link" href="scoreboard.html">Scoreboard</a>
+        </li> 
+        <li class="nav-item">
+          <a class="nav-link custom-nav-link" href="analytics.html">Analytics</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main role="main">
+  
+  <div class="container">
+    <div class="row">
+    <div class="col-md-8 offset-md-2">
+
+        <div style="padding-top:4vh;text-align:center;">
+
+            <!-- Motto -->
+            <div style="font-family:'Cormorant Garamond',serif; font-size:2.4rem; letter-spacing:.18em; text-transform:uppercase; color:#d7d0c7; margin-bottom:40px; opacity:.95; line-height:1.35;">
+                <div>No Salvation In</div>
+                <div>
+                    <span style="color:#b08d57; font-style:italic;">Gold</span>
+                    Nor In Power
+                </div>
+            </div>
+
+            <!-- Narrative -->
+            <div style="color:#8f887d; line-height:1.9; margin-bottom:55px; font-size:1rem;">
+                Twenty years ago, Hrudaya disappeared.<br>
+                Three nights ago, the sirens began.<br>
+                Tonight, a package arrived.
+            </div>
+
+            <!-- Case Card -->
+            <div style="max-width:700px; margin:auto; background:rgba(176,141,87,.03); border:1px solid rgba(176,141,87,.18); padding:40px; backdrop-filter:blur(10px); box-shadow:0 0 40px rgba(176,141,87,.04); text-align:left;">
+                <div style="max-width:700px; margin:auto; background:rgba(176,141,87,.03); border:1px solid rgba(176,141,87,.18); padding:40px; backdrop-filter:blur(10px); box-shadow:0 0 40px rgba(176,141,87,.04); text-align:center;">
+
+                    <div style="color:#b08d57; letter-spacing:.25em; font-size:.85rem; margin-bottom:20px; text-transform:uppercase;">
+                        UAVDEL X12AF
+                    </div>
+
+                    <div style="margin-bottom:15px;">
+                        <span style="font-family:'Parisienne', cursive; font-size:2rem; color:#d8c7a2; text-shadow:0 0 12px rgba(176,141,87,.15);">
+                            Hrudaya
+                        </span>
+                    </div>
+
+                    <hr style="border:none; border-top:1px solid rgba(176,141,87,.15); margin:28px 0;">
+
+                    <div style="font-family:'Cormorant Garamond',serif; font-size:1.0rem; font-style:italic; color:#ddd6ca; margin-bottom:35px;">
+                        “Software can be wiped. Hardware remembers.”
+                    </div>
+
+                    <div style="display:flex; justify-content:center; align-items:center; gap:14px; flex-wrap:wrap;">
+                        <a href="challenges.html" class="btn" style="min-width:220px; padding:14px 30px; background:#b08d57; border:none; color:#090909; font-weight:600; letter-spacing:.15em; text-transform:uppercase;">
+                            Read The Story
+                        </a>
+                    </div>
+                </div>
+<style>
+body { background:#090909 !important; color:#d7d0c7 !important; }
+.card, .jumbotron { background:transparent !important; border:none !important; }
+a { transition:.25s ease; }
+a:hover { text-decoration:none !important; transform:translateY(-1px); }
+hr { opacity:1 !important; }
+</style>
+<div style="margin-top:100px; color:#5c554d; font-size:.8rem; text-align:center; letter-spacing:.18em; text-transform:uppercase; font-family:sans-serif;">
+        Globus Electronics Ltd.<br><br>
+        All Rights Reserved. 
+    </div>
+  </div>
+</main>
+
+<div x-data>
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div x-ref="toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+      <div class="toast-header">
+        <strong class="me-auto" x-text="$store.toast.title"></strong>
+        <small>just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body" x-html="$store.toast.html">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div x-data>
+  <div class="modal fade" x-ref="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" x-text="$store.modal.title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p x-html="$store.modal.html"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="module" src="themes/core/static/assets/index.94b01c79.js"></script>
+  <script type="module" src="themes/core/static/assets/page.9d188b19.js"></script>
+
+  <!-- Auto-hide Navbar Script -->
+  <script>
+      let lastScrollTop = 0;
+      const navbar = document.getElementById('main-nav');
+
+      window.addEventListener('scroll', function() {
+          let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          
+          if (scrollTop > lastScrollTop && scrollTop > 80) {
+              navbar.style.transform = 'translateY(-100%)'; 
+          } else {
+              navbar.style.transform = 'translateY(0)'; 
+          }
+          lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+      });
+  </script>
+
+</body>
+</html>
